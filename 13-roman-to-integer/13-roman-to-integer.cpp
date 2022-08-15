@@ -11,7 +11,7 @@ public:
                                    { 'M' , 1000 } };
                                    
    int sum = T[s.back()];
-   for (int i = s.length() - 2; i >= 0; --i) 
+   for (int i = 0; i < s.length()-1; i++) 
    {
        if (T[s[i]] < T[s[i + 1]])
        {
