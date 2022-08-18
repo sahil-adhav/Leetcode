@@ -6,7 +6,7 @@ public:
         ans.push_back(res);
         
         for(int i=ind; i<nums.size(); i++){
-            if(i > ind and nums[i] == nums[i-1]) continue;
+            if(i != ind and nums[i] == nums[i-1]) continue;
             
             res.push_back(nums[i]);
             help(i+1, res, ans, nums);
