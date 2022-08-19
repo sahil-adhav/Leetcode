@@ -3,7 +3,7 @@ public:
     
     void help(int ind, vector<vector<int>>& ans, vector<int>& nums){
         //Base Condition or when condition satisfies
-        if(ind >= nums.size()){
+        if(ind == nums.size()){
             ans.push_back(nums);
             return;
         }
