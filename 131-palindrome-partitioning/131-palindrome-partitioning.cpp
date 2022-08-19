@@ -24,6 +24,10 @@ public:
         }
     }
     
+    // aab ==> a | ab
+    // aab ==> aa | b
+    // aab ==> a | a | b
+    
     bool palindrome(string s, int start, int end){
         while(start <= end){
             if(s[start++] != s[end--]){
