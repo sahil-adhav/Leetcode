@@ -1,32 +1,60 @@
 class Solution {
 public:
     
-   void nQueen_solve(int col, vector<string>& board, vector<vector<string>>& queen_puzzle, vector<int>& leftrow, vector<int>& upperdiagonal, vector<int>& lowerdiagonal, int n){
-       //Base condition or condition satisfied
-       if(col == n){
-           queen_puzzle.push_back(board);
-           return;
-       }
-       
-       //we check if we can place queen or not
-       for(int row=0; row<n; row++){
-           if(leftrow[row] == 0 and lowerdiagonal[row+col] == 0 and
-             upperdiagonal[n-1 + col-row] == 0){
-               
-               board[row][col] = 'Q';
-               leftrow[row] = 1;
-               lowerdiagonal[row + col] = 1;
-               upperdiagonal[n-1 + col-row] = 1;
-               
-               nQueen_solve(col+1, board, queen_puzzle, leftrow, upperdiagonal, lowerdiagonal, n);
-               
-               board[row][col] = '.';
-               leftrow[row] = 0;
-               lowerdiagonal[row + col] = 0;
-               upperdiagonal[n-1 + col-row] = 0;
-           }
-       }
-   } 
+    bool can_place_queen(int row, int col, vector<string>& board, int n){
+        
+        //check for upper diagonal left side
+        int duprow = row;
+        int dupcol = col;
+        while(row >= 0 and col >= 0){
+            if(board[row][col] == 'Q'){
+                return false;
+            }
+            row--;
+            col--;
+        }
+        
+        //check for left side
+        row = duprow;
+        col = dupcol;
+        while(col >= 0){
+            if(board[row][col] == 'Q'){
+                return false;
+            }
+            col--;
+        }
+        
+        //check for bottom diagonal left
+        row = duprow;
+        col = dupcol;
+        while(row < n and col >= 0){
+            if(board[row][col] == 'Q'){
+                return false;
+            }
+            row++;
+            col--;
+        }
+        
+        //if we can place queen
+        return true;
+    }
+    
+    void nQueen_solve(int col, vector<string> &board, vector<vector<string>> &queen_puzzle, int n){
+        //Base Condition or condition is satisfied
+        if(col == n){
+            queen_puzzle.push_back(board);
+            return;
+        }
+        
+        //Calculation Part or we check if we can place the queen or not
+        for(int row=0; row<n; row++){
+            if(can_place_queen(row, col, board, n)){
+                board[row][col] = 'Q';
+                nQueen_solve(col+1, board, queen_puzzle, n);
+                board[row][col] = '.';
+            }
+        }
+    }
     
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> queen_puzzle;
@@ -37,11 +65,7 @@ public:
             board[i] = s;
         }
         
-        vector<int> leftrow(n, 0);
-        vector<int> upperdiagonal(2*n-1, 0);
-        vector<int> lowerdiagonal(2*n-1, 0);
-        
-        nQueen_solve(0, board, queen_puzzle, leftrow, upperdiagonal, lowerdiagonal, n);
+        nQueen_solve(0, board, queen_puzzle, n);
         
         return queen_puzzle;
     }
