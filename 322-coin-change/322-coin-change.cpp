@@ -49,5 +49,37 @@ public:
         }
         int ans = dp[n-1][amount];
         return (ans == 1e9) ? -1 : ans;
+        
+//         int n = coins.size();
+//         vector<int> prev(amount+1, 0), curr(amount+1, 0);
+        
+//         //Base Case
+//         for(int T=0; T<=amount; T++){
+//             if(T%coins[0] == 0){
+//                 prev[T] = T/coins[0];
+//             }
+//             else prev[T] = 1e9;
+//         }
+        
+//         for(int ind=1; ind<n; ind++){
+//             for(int tar=0; tar<=amount; tar++){
+//                 int notPick = 0 + prev[tar];
+//                 int pick = 1e9;
+//                 if(coins[ind] <= tar){
+//                     pick = 1 + prev[tar-coins[ind]];
+//                 }
+//                 curr[tar] = min(pick, notPick);
+//             }
+//             prev = curr;
+//         }
+//         int ans = prev[amount];
+//         return (ans >= 1e9) ? -1 : ans;
     }
 };
+
+
+
+
+
+
+
