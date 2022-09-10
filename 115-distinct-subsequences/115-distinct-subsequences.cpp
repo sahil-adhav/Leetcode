@@ -14,9 +14,7 @@ public:
         if(s[i] == t[j]){
             return dp[i][j] = f(s, t, i-1, j-1, dp) + f(s, t, i-1, j, dp);
         }
-        else{
-            return dp[i][j] = f(s, t, i-1, j, dp);
-        }
+        return dp[i][j] = f(s, t, i-1, j, dp);
     }
     
     int numDistinct(string s, string t) {
