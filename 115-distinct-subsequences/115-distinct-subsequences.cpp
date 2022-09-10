@@ -20,9 +20,9 @@ public:
     int numDistinct(string s, string t) {
         int n = s.length();
         int m = t.length();
-        vector<double> prev(m+1, 0), curr(m+1, 0);
+        vector<double> prev(m+1, 0);
         
-        prev[0] = curr[0] = 1;
+        prev[0]  = 1;
         
         //calculation
         for(int i=1; i<=n; i++){
