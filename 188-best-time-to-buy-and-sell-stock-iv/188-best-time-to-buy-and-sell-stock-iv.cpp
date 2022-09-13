@@ -25,7 +25,7 @@ public:
         int n = prices.size();
         //days ---- buy/sell ---- cap
         // days x 2 x k
-        vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(k+1, 0)));
+        vector<vector<int>> ahead(2, vector<int>(k+1, 0)), curr(2, vector<int>(k+1, 0));
         
         //base cases
         for(int day=n-1; day>=0; day--){
@@ -33,18 +33,19 @@ public:
                 for(int cap=1; cap<=k; cap++){
                     int maxProfit = INT_MIN;
                     if(buy == 1){
-                        maxProfit = max(-prices[day] + dp[day+1][0][cap], 
-                                    0 + dp[day+1][1][cap]);
+                        maxProfit = max(-prices[day] + ahead[0][cap], 
+                                    0 + ahead[1][cap]);
                     }
                     else{
-                        maxProfit = max(prices[day] + dp[day+1][1][cap-1], 
-                                    0 + dp[day+1][0][cap]);    
+                        maxProfit = max(prices[day] + ahead[1][cap-1], 
+                                    0 + ahead[0][cap]);    
                     }
 
-                    dp[day][buy][cap] = maxProfit;                    
+                    curr[buy][cap] = maxProfit;                    
                 }
+                ahead = curr;
             }
         }
-        return dp[0][1][k];
+        return ahead[1][k];
     }
 };
