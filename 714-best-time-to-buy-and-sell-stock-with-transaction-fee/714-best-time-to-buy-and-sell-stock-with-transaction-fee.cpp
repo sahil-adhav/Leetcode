@@ -19,16 +19,17 @@ public:
     
     int maxProfit(vector<int>& prices, int fee) {
         int n = prices.size();
-        vector<vector<int>> dp(n+1, vector<int>(2, 0));
+        vector<int> ahead(2, 0), curr(2,0);
         
         for(int day=n-1; day>=0; day--){
             
-            dp[day][1] = max(-prices[day]+dp[day+1][0], 
-                           0+dp[day+1][1]);
+            curr[1] = max(-prices[day]+ahead[0], 
+                           0+ahead[1]);
             
-            dp[day][0] = max(prices[day]-fee+dp[day+1][1],
-                               0+dp[day+1][0]);
+            curr[0] = max(prices[day]-fee+ahead[1],
+                               0+ahead[0]);
+            ahead = curr;
         }
-        return dp[0][1];
+        return ahead[1];
     }
 };
