@@ -1,16 +1,19 @@
 class Solution {
 public:
+    
+    int f(int ind, int prev, int n, vector<int> &nums, vector<vector<int>> &dp){
+        if(ind == n) return 0;
+        if(dp[ind][prev+1] != -1) return dp[ind][prev+1];
+        int notPick = f(ind+1, prev, n, nums, dp);
+        int pick = -1e9;
+        if(prev == -1 or nums[ind] >  nums[prev]) pick = 1 + f(ind+1, ind, n, nums, dp);
+        
+        return dp[ind][prev+1] = max(pick, notPick);
+    }
+    
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> sub;
-        for (int x : nums) {
-            if (sub.empty() || sub[sub.size() - 1] < x) {
-                sub.push_back(x);
-            } else {
-                auto it = lower_bound(sub.begin(), sub.end(), x); 
-                // Find the index of the smallest number >= x
-                *it = x; // Replace that number with x
-            }
-        }
-        return sub.size();
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int>(n+1, -1));
+        return f(0, -1, n, nums, dp);
     }
 };
