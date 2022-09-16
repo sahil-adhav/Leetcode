@@ -6,7 +6,7 @@ public:
         vector<int> dp(n, 1), hash(n);
         
         sort(nums.begin(), nums.end());
-        for(int curr=0; curr<n; curr++){
+        for(int curr=0; curr<n; curr++){ // 1 4 8 16
            hash[curr] = curr;
            for(int prevInd=0; prevInd<curr; prevInd++){
                if(nums[curr] % nums[prevInd] == 0 && 1+dp[prevInd] > dp[curr]){
@@ -30,5 +30,7 @@ public:
         
         reverse(ans.begin(), ans.end());
         return ans;
+        
+        //O(nlogn) + O(n^2) + O(n {worst case})
     }
 };
