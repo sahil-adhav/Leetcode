@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+    // O(n^2) + O(len of string) + O(nlogn)
     bool checkPossible(string &s1, string &s2){
         if(s1.size() != s2.size()+1){
             return false;
