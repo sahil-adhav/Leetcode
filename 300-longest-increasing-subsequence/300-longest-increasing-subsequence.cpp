@@ -3,7 +3,7 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
         vector<int> dp(n, 1), hash(n, 1);
-        int lastIndex = 0;
+        int lastIndex = -1;
         int maxi  = -1;        
         for(int curr=0; curr<n; curr++){
             hash[curr] = curr;
@@ -14,7 +14,11 @@ public:
                 }
             }
             // maxi = max(maxi, dp[curr]);
-            if(dp[curr] > maxi){
+  
+        }
+        
+        for(int curr=0; curr<n; curr++){
+           if(dp[curr] > maxi){
                 maxi = dp[curr];
                 lastIndex = curr;
             }
