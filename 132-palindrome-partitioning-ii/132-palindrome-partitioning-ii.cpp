@@ -26,7 +26,19 @@ public:
     
     int minCut(string s) {
         int n = s.length();
-        vector<int> dp(n, -1);
-        return f(0, n, s, dp)-1;
+        vector<int> dp(n+1, 0);
+        
+        dp[n] = 0;
+        for(int i=n-1; i>=0; i--){
+            int mini = 1e9;
+            for(int j=i; j<n; j++){
+                if(isPalindrome(i, j, s)){
+                    int cut = 1 + dp[j+1];
+                    mini = min(mini, cut);
+                }
+            }
+            dp[i] = mini;  
+        }
+        return dp[0] - 1;
     }
 };
