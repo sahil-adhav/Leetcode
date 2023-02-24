@@ -11,7 +11,7 @@ public:
             else if(matrix[i][j] > target){
                 j--;
             }
-            else{
+            else if(matrix[i][j] < target){
                 i++;
             }
         }
