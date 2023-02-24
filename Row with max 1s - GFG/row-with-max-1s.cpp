@@ -15,11 +15,11 @@ public:
 	            if(arr[i][j] == 1){
 	                currAns++;
 	            }
-	            if(ans < currAns){
-	                ans = currAns;
-	                ind = i;
-	            }
 	        }
+	        if(ans < currAns){
+	           ans = currAns;
+	           ind = i;
+	       }
 	    }
 	    return ind;
 	}
