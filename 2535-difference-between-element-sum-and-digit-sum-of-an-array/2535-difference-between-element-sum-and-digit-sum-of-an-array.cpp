@@ -15,9 +15,6 @@ public:
         
         for(int i=0; i<nums.size(); i++){
             elementalSum += nums[i];
-        }
-        
-        for(int i=0; i<nums.size(); i++){
             digitSum += digitSumOfNumber(nums[i]);
         }
         
