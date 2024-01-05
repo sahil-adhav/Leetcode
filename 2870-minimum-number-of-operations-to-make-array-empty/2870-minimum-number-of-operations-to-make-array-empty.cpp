@@ -14,10 +14,10 @@ public:
             if(occurence == 1){
                 return -1;
             }
-            minOp += occurence/3;
-            if(occurence % 3){
-                minOp++;
-            }
+            minOp += ceil((double)occurence/3);
+            // if(occurence % 3){
+            //     minOp++;
+            // }
         }
         
         return minOp;
