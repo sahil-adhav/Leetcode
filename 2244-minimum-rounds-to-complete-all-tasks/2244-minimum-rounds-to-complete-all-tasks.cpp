@@ -15,7 +15,10 @@ public:
                 return -1;
             }
             
-            minRounds += ceil((double)occurence / 3);
+            minRounds += occurence / 3;
+            if(occurence % 3 != 0){
+                minRounds++;
+            }
         }
         
         return minRounds;
