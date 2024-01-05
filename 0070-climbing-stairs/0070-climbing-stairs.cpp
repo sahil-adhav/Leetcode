@@ -1,21 +1,19 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        int ways = 0;
+        int *ways = new int[n+1];
         
-        if(n <= 0) return 0;
-        if(n == 1) return 1;
-        if(n == 2) return 2;
-        
-        int twoStepsBeforeN = 1;
-        int oneStepBeforeN = 2;
-        
-        for(int i=2; i<n; i++){
-            ways = twoStepsBeforeN + oneStepBeforeN;
-            twoStepsBeforeN = oneStepBeforeN;
-            oneStepBeforeN = ways;
+        if(n <= 2){
+            return n;
         }
         
-        return ways;
+        ways[1] = 1;
+        ways[2] = 2;
+        
+       for(int i=3; i<=n; i++){
+           ways[i] = ways[i-1] + ways[i-2];
+       }
+        
+        return ways[n];
     }
 };
