@@ -1,7 +1,7 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        int *ways = new int[n+1];
+        vector<int> ways(n+1);
         
         if(n <= 2){
             return n;
