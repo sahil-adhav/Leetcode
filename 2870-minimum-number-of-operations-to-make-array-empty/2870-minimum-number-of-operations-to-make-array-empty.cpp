@@ -1,9 +1,8 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums) {
-        int len = nums.size();
-        unordered_map<int,int> mpp;
         int minOp = 0;
+        map<int,int> mpp;
         
         for(auto num : nums){
             mpp[num]++;
@@ -14,10 +13,7 @@ public:
             if(occurence == 1){
                 return -1;
             }
-            minOp += ceil((double)occurence/3);
-            // if(occurence % 3){
-            //     minOp++;
-            // }
+            minOp += ceil((double)occurence/3); 
         }
         
         return minOp;
